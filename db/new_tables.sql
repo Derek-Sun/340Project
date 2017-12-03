@@ -1,0 +1,75 @@
+DROP TABLE IF EXISTS Company;
+DROP TABLE IF EXISTS Field;
+DROP TABLE IF EXISTS Code;
+DROP TABLE IF EXISTS Stack;
+DROP TABLE IF EXISTS Tool;
+DROP TABLE IF EXISTS toolsinStack;
+DROP TABLE IF EXISTS codeinStack;
+
+
+CREATE TABLE Field(
+    id int NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    CONSTRAINT UNIQUE(name),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Tool(
+    id int NOT NULL AUTO_INCREMENT,
+    name VARCHAR (255) NOT NULL,
+    description VARCHAR (255),
+    CONSTRAINT UNIQUE(name),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Code(
+    id int NOT NULL AUTO_INCREMENT,
+    name VARCHAR (255) NOT NULL,
+    CONSTRAINT UNIQUE (name),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Company (
+   id int NOT NULL AUTO_INCREMENT,
+   name VARCHAR(255) NOT NULL,
+   FieldID int,
+   PRIMARY KEY(id),
+   CONSTRAINT UNIQUE (name),
+   FOREIGN KEY (FieldID) REFERENCES Field(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE Stack(
+    id int NOT NULL AUTO_INCREMENT,
+    cid int,
+    companyName VARCHAR(255),
+    PRIMARY KEY(id),
+    FOREIGN KEY (cid) REFERENCES Company(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE toolsinStack(
+    sid int,
+    tid int,
+    PRIMARY KEY (sid, tid),
+    FOREIGN KEY (sid) REFERENCES Stack(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (tid) REFERENCES Tool (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE codeinStack(
+    sid int,
+    cid int,
+    PRIMARY KEY (sid, cid),
+    FOREIGN KEY (sid) REFERENCES Stack(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (cid) REFERENCES Code (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);

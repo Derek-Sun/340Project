@@ -1,0 +1,7 @@
+<h1>Update {{Tools.name}}</h1>
+<form id="updateTools" action="/tools" method="post">
+    Name: <input type = "text" name="name" value="{{Tools.name}}"><br>
+    Description: <input type = "text" name="description" value="{{Tools.description}}">
+    <button onclick="updateTool({{Tools.id}}"></button>
+</form>
+<script defer></script>

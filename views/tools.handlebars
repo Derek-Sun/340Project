@@ -1,0 +1,21 @@
+<h1>Tools</h1>
+<table>
+    <thead>
+        <th>
+            Tool
+        </th>
+        <th>
+            Description
+        </th>
+    </thead>
+    <tbody>
+        {{#each Tools}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{description}}</td>
+            <td><button onclick="deleteTool({{id}})">Delete</button></td>
+            <td><a href="/tools/{{id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
